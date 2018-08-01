@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <link rel='stylesheet' href='./src/style.css'/>
+      <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/> -->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>Register to do list</title>
+      <link rel='stylesheet' href='https://d33wubrfki0l68.cloudfront.net/bundles/0b74048c039f0a0dd1bca1eae4d4581f2d9c661e.css' />
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+      <script src="./src/efbe.js"></script>
+   </head>
+   <body id="body">
+      <div id="fb-root"></div>
+      <script>(function(d, s, id) {
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) return;
+         js = d.createElement(s); js.id = id;
+         js.src = 'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v3.0&appId=658794441158401&autoLogAppEvents=1';
+         fjs.parentNode.insertBefore(js, fjs);
+         }(document, 'script', 'facebook-jssdk'));
+      </script>
+      <div id="logins">
+         <!--begin vue instances -->
+         <main class="site" id="top">
+            <div class="column is-half nav-home">
+               <nav class="navbar" aria-label="main navigation">
+                  <div class="navbar-brand">
+                     <button class="button navbar-burger" data-target="navMenu">
+                     <span></span>
+                     </button>
+                  </div>
+                  <div class="navbar-menu">
+                     <div class="navbar-start"></div>
+                  </div>
+                  <div class="navbar-menu is-hidden-desktop" id="navMenu">
+                     <span>
+                     <a class="navbar-item is-active" href="#">Home</a>
+                     </span>
+                     <span>
+                     <a class="navbar-item" href="#">About</a>
+                     </span>
+                     <hr>
+                  </div>
+               </nav>
+            </div>
+            <div class="home-columns columns">
+               <div class="column is-half is-home-left-column">
+                  <p v-on:click="loginfb" class="logins"><img height="auto" width="450px" src="./src/fesbuk.png"/></p>
+                  <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
+                  <div id="status"></div>
+                  <!-- <button onclick="logout()">Logout</button> -->
+               </div>
+               <div class="column has-background-blue is-home-right-column">
+                  <div class="lang-choser is-hidden-touch"></div>
+                  <h1 id="hi">Hi!</h1>
+                  <p>Log in</p>
+                  <div class="field">
+                     <div v-bind:style="{color:style.color}">
+                        {{err}}
+                     </div>
+                     <p class="control has-icons-left has-icons-right">
+                        <input v-model="email" class="input" type="email" placeholder="Email">
+                        <span class="icon is-small is-left">
+                        <i class="fas fa-envelope"></i>
+                        </span>
+                        <span class="icon is-small is-right">
+                        <i class="fas fa-check"></i>
+                        </span>
+                     </p>
+                  </div>
+                  <div class="field">
+                     <p class="control has-icons-left">
+                        <input v-model="password" class="input" type="password" placeholder="Password">
+                        <span class="icon is-small is-left">
+                        <i class="fas fa-lock"></i>
+                        </span>
+                     </p>
+                  </div>
+                  <div class="field">
+                     <p class="control">
+                        <button v-on:click="loginact" class="button is-success is-medium">
+                        Login
+                        </button>
+                     </p>
+                  </div>
+                  <div class="is-divider-vertical" data-content="OR"></div>
+                  <hr/>
+                  <hr/>
+                  <div class="is-divider" data-content="OR"></div>
+                  Sign Up:
+                   {{er}}
+                  <div class="box">
+                     <div class="field">
+                        <p class="control has-icons-left has-icons-right">
+                           <input v-model="username1" class="input" type="email" placeholder="User Name">
+                           <span class="icon is-small is-left"></span>
+                           <span class="icon is-small is-right">
+                           <i class="fas fa-check"></i>
+                           </span>
+                        </p>
+                     </div>
+                     <div class="field">
+                        <p class="control has-icons-left has-icons-right">
+                           <input v-model="email1" class="input" type="email" placeholder="Email">
+                           <span class="icon is-small is-left">
+                           <i class="fas fa-envelope"></i>
+                           </span>
+                           <span class="icon is-small is-right">
+                           <i class="fas fa-check"></i>
+                           </span>
+                        </p>
+                     </div>
+                     <div class="field">
+                        <p class="control has-icons-left">
+                           <input v-model="password1" class="input" type="password" placeholder="Password">
+                           <span class="icon is-small is-left">
+                           <i class="fas fa-lock"></i>
+                           </span>
+                        </p>
+                     </div>
+                     <div class="field">
+
+                        <p class="control">
+                           <a v-on:click="registeract" class="button is-warning is-medium">Sign Up</a>
+                        </p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </main>
+      </div>
+      <script src="./src/user.js"></script>
+   </body>
+</html>

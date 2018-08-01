@@ -1,0 +1,138 @@
+
+
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+   <head>
+      <link rel='stylesheet' href='./src/style.css'/>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Welcome, to do List FancyAp !</title>
+      <script src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+      <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous"> -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+      <!-- <script defer="defer" src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script> -->
+      <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/v4-shims.css">
+      <script src="https://use.fontawesome.com/releases/v5.1.1/js/all.js"></script>
+      <script src="https://use.fontawesome.com/releases/v5.1.1/js/v4-shims.js"></script>
+      <script src="./src/efbe.js"></script>
+   </head>
+   <body>
+      <div id="todos">
+         <nav class="navbar is-transparent is-fixed-top ">
+            <div class="navbar-brand">
+               <a class="navbar-item" href="#">
+               <img height="90px" width="auto" src="./src/icons.png"/></a>
+               <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
+                  <span></span>
+               </div>
+            </div>
+            <div id="navbarExampleTransparentExample" class="navbar-menu">
+               <div class="navbar-start">
+                  <a class="navbar-item" href="#">
+                  Home
+                  </a>
+                   <a href="/youtube.html" class="button is-info is-rounded">Search on Youtube</a>
+               </div>
+               <div class="navbar-end">
+                  <div class="navbar-item">
+                     <div class="field is-grouped">
+                        <p class="control">
+                           <button id="logou" v-on:click="logouts" class="bd-tw-button button is-primary is-rounded">
+                           <span>
+                           Logout
+                           </span>
+                           </button>
+
+                        </p>
+
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </nav>
+         <section class="section">
+            <div class="container">
+
+
+
+
+
+               <div v-if="daftar.length == 0">
+                  <p class="subtitle">
+                     Welcome, BRO! please begin adding todo list:
+                  </p>
+               </div>
+               <div v-else>
+                  <!-- welcome, <strong>{{daftar[0].author.username}}..</strong>, please begin adding todo list: -->
+               </div>
+            </div>
+         </section>
+         <div class="container">
+            <div class="field is-grouped">
+               <p class="control is-expanded">
+                  <input v-model="contentmu" class="input is-medium" type="text" placeholder="write to do list:">
+               </p>
+               <p class="control">
+                  <a v-on:click="addtodo" class="button is-info">
+                  Add to Do
+                  </a>
+               </p>
+            </div>
+            <div class="notification">
+               <strong>Todo<span id="red">LIST</span></strong>
+               <div class="card-table">
+                  <div class="content">
+                     <table class="table is-fullwidth is-striped">
+                        <tbody>
+                           <tr v-for="(todolist, index) in daftar" :key="index">
+                              <td width="5%">
+                                 <i class="fa fa-bell-o"></i>
+                              </td>
+                              <td>
+                                 <p v-if="!inputIsEditable[index]">{{todolist.content }} </p>
+                                 <div id="editan">
+                                    <input v-bind:id="todolist._id"  v-if="inputIsEditable[index]" v-bind:value="todolist.content " class="input is-rounded is-warning " type="text " v-bind:placeholder="todolist.content ">
+                                 </div>
+                              </td>
+                              <td> {{todolist.createdAt}}</td>
+                              <td>
+                                 <div v-if="!inputIsEditable[index]" class="tags has-addons ">
+                                    <a @click="edited({ index, id: todolist._id }) " class="button is-warning">Edit </a>
+                                    <!-- <span @click="edited({ index, id: todolist._id }) "> -->
+                                    <!-- <span class="is-primary is-medium tag "> -->
+                                    <!-- UPDATE -->
+                                    <!-- </span> -->
+                                    <!-- <span class="tag is-medium ">></span> -->
+                                    <!-- </span> -->
+                                 </div>
+                                 <a v-if="inputIsEditable[index]" @click="saveedit(todolist._id)" class="button is-success is-hovered">SAVE </a>
+                                 <!-- <button v-if="inputIsEditable[index]" @click="saveedit(todolist._id)">SAVE</button> -->
+                              </td>
+                              <td>
+                                 <!-- <span v-on:click="deletedata(todolist._id) " class="tag is-warning ">
+                                    Delete
+                                    <button class="delete is-large "></button>
+                                    </span> -->
+                                 <a v-on:click="deletedata(todolist._id) " class="button is-danger is-outlined">
+                                 <span>Delete</span>
+                                 <span class="icon is-small">
+                                 <i class="fas fa-times"></i>
+                                 </span>
+                                 </a>
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- end of todos EL -->
+      <script src="./src/todos.js"></script>
+   </body>
+</html>
